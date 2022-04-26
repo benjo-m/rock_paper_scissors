@@ -1,34 +1,25 @@
-let playerSelection;
 let playerPoints = 0;
 let computerPoints = 0;
 
-function game() {
-    do {
-        playerSelection = prompt("Rock, paper or scissors: ");
-        playerSelection.toLowerCase();
-    } while (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors");
+let buttons = document.querySelectorAll("button");
 
-    function winner() {
-        return Math.floor(Math.random() * 3) + 1;
-    }
+let displayPlayerPoints = document.getElementById("displayPlayerPoints");
+let displayComputerPoints = document.getElementById("displayComputerPoints");
 
-    if (winner() == 1) {
-        console.log("Player won the round!");
+for(let i = 0; i < 3; i++) {
+    buttons[i].addEventListener("click", addPoints);
+}
+
+function addPoints() {
+    let winner = Math.floor(Math.random() * 2);
+    if (winner) {
         playerPoints++;
-    } else if (winner() == 2) {
-        console.log("Computer won the round!");
+        displayPlayerPoints.textContent = playerPoints;
+        console.log("Player wins!");
+    }
+    else {
         computerPoints++;
-    } else if (winner() == 3)
-        console.log("Round tie!");
+        displayComputerPoints.textContent = computerPoints;
+        console.log("Computer wins!");
+    }
 }
-
-for (let i = 0; i < 3; i++) {
-    game();
-}
-
-if (playerPoints > computerPoints)
-    console.log("Player Wins!!!");
-else if (playerPoints < computerPoints)
-    console.log("Computer Wins!!!");
-else 
-    console.log("Tie!!!");
